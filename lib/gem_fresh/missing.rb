@@ -26,6 +26,7 @@ module GemFresh
         end
       end
       missing_gems.reject!{|g| g == 'rails'}
+      missing_gems.reject!{|g| g == 'gem_fresh'}
       missing_gems
     end
 
