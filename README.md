@@ -1,39 +1,69 @@
-# Gemfresh
+# GemFresh
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gemfresh`. To experiment with that code, run `bin/console` for an interactive prompt.
+The purpose of GemFresh is to expose useful information about how outdated your application gems are.
 
-TODO: Delete this and the text above, and describe your gem
+## Setup
 
-## Installation
+Create a file called Gemfresh.rb in the root directory of your application.  Fill it out like this:
 
-Add this line to your application's Gemfile:
+    # Any gems that you put in the Gemfile should also be listed here.
+    # The rake metrics:outdated_gems task calculates which gems are
+    # outdated and then combines that information with the information
+    # listed here about a particular gem's reach in the application code.
+    #
+    GemFresh::Config.configure do |gems|
 
-```ruby
-gem 'gemfresh'
-```
+      # Updating these gems could require you to make large, system-wide changes
+      # to the application code.
+      gems.with_system_wide_impact %w(
+        resque
+        rspec
+        ...
+      )
 
-And then execute:
+      # Updating these gems could require you to make some changes to small
+      # sections of the application.
+      gems.with_local_impact %w(
+        fog
+        tabulous
+        ...
+      )
 
-    $ bundle
+      # When updating these gems, you barely have to touch any code at all.
+      gems.with_minimal_impact %w(
+        airbrake
+        bullet
+        ...
+      )
 
-Or install it yourself as:
+      # We ignore these since we are in complete control of their update cycles.
+      gems.that_are_private %w(
+        dmc_server_admin
+        job_state
+        ...
+      )
 
-    $ gem install gemfresh
+    end
+
+The create a rake task like this:
+
+    namespace :metrics do
+      desc "display outdated gem version metrics"
+      task :outdated_gems do
+        GemFresh::Reporter.new.report
+      end
+    end
+
 
 ## Usage
 
-TODO: Write usage instructions here
+See information on your outdated gems by running the rake task:
 
-## Development
+    rake metrics:outdated_gems
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+This combines information from `bundle outdated` with the information in Gemfresh.rb to give a weighted view as to how outdated your third-party Ruby code is and how much it matters.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Whenever you add a gem to your Gemfile, add it to Gemfresh.rb so that the rake task knows how important the gem is.
 
-## Contributing
+Gems are assigned points.  The more central a gem is, and the more outdated it is, the higher the points.  You can think of the points as a "bounty" on the gem, telling you how badly it needs to be updated.
 
-1. Fork it ( https://github.com/[my-github-username]/gemfresh/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
