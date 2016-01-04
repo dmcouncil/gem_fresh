@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class GemVersion
     attr_reader :major, :minor, :patch
 

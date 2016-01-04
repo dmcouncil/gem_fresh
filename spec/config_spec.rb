@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Gemfresh::Config do
-  let(:config) { Gemfresh::Config.class_variable_get(:@@config) }
+describe GemFresh::Config do
+  let(:config) { GemFresh::Config.class_variable_get(:@@config) }
   before do
-    Gemfresh::Config.configure do |gems|
+    GemFresh::Config.configure do |gems|
       gems.with_system_wide_impact %w(
         resque
         rspec
@@ -24,7 +24,7 @@ describe Gemfresh::Config do
 
   describe ".configure" do
     it "initializes @@config" do
-      expect(config).to be_an_instance_of(Gemfresh::Config)
+      expect(config).to be_an_instance_of(GemFresh::Config)
     end
 
     it "sets @system_wide_gems" do
@@ -46,7 +46,7 @@ describe Gemfresh::Config do
 
   describe ".config" do
     it "returns @@config" do
-      expect(Gemfresh::Config.config).to eq(config)
+      expect(GemFresh::Config.config).to eq(config)
     end
   end
 end

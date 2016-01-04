@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class Reporter
 
     def initialize

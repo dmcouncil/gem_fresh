@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Gemfresh do
+describe GemFresh do
   it 'has a version number' do
-    expect(Gemfresh::VERSION).not_to be nil
+    expect(GemFresh::VERSION).not_to be nil
   end
 end

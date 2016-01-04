@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class Calculator
 
     # If a gem is behind by a major version, it's worth more points

@@ -1,5 +1,6 @@
-module Gemfresh
+module GemFresh
   class Config
+
     attr_reader :system_wide_gems, :local_gems, :minimal_gems, :private_gems
 
     def self.configure(&block)
@@ -27,7 +28,11 @@ module Gemfresh
       @private_gems = clean_gems(gems)
     end
 
-    private
+    def all_gems
+      @system_wide_gems + @local_gems + @minimal_gems + @private_gems
+    end
+
+  private
 
     def clean_gems(gems)
       if gems.include?('rails')
@@ -35,5 +40,6 @@ module Gemfresh
       end
       gems
     end
+
   end
 end
