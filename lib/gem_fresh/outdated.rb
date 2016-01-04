@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class Outdated
 
     attr_reader :gem_info

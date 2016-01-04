@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class Config
     attr_reader :system_wide_gems, :local_gems, :minimal_gems, :private_gems
 
@@ -31,7 +31,7 @@ module Gemfresh
 
     def clean_gems(gems)
       if gems.include?('rails')
-        raise "Do not explicitly specify the rails gem in Gemfresh.rb."
+        raise "Do not explicitly specify the rails gem in GemFresh.rb."
       end
       gems
     end

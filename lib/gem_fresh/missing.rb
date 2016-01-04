@@ -7,7 +7,7 @@ module GemFresh
 
     def check_for_missing_gems!
       if missing_gems.any?
-        message = "The following gems are in your Gemfile but not in your Gemfresh.rb file:\n"
+        message = "The following gems are in your Gemfile but not in your GemFresh.rb file:\n"
         missing_gems.each do |gem_name|
           message << "  #{gem_name}\n"
         end

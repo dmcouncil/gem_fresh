@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Gemfresh::GemVersion do
-  let(:gem_version) { Gemfresh::GemVersion.new(version_string) }
+describe GemFresh::GemVersion do
+  let(:gem_version) { GemFresh::GemVersion.new(version_string) }
 
   context "when version_string is 7.6.2" do
     let(:version_string) { "7.6.2" }

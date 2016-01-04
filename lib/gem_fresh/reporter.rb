@@ -1,4 +1,4 @@
-module Gemfresh
+module GemFresh
   class Reporter
 
     def initialize
@@ -12,7 +12,7 @@ module Gemfresh
       puts "A bounty is calculated for each gem based on how outdated the gem"
       puts "is and the impact the gem has on the application code.  Foundational"
       puts "gems like RSpec get a higher bounty, simple add-on tools like bullet"
-      puts "get a lower bounty.  See Gemfresh.rb for details."
+      puts "get a lower bounty.  See GemFresh.rb for details."
       puts
       puts "The total bounty is #{@calculator.total_score} points.".magenta
       puts
