@@ -19,7 +19,7 @@ module GemFresh
 
     def missing_gems
       missing_gems = []
-      gems_from_gemfresh = GemFresh::Config.config.all_gems
+      gems_from_gemfresh = gemfresh.all_gems
       gem_names.each do |gem_from_gemfile|
         if not gems_from_gemfresh.include?(gem_from_gemfile)
           missing_gems << gem_from_gemfile
@@ -36,10 +36,15 @@ module GemFresh
       end
     end
 
+    #TODO: we shouldn't be so tied to Rails in future
     def parse_gemfile
       gemfile = File.join(Rails.root, 'Gemfile')
       @gem_lines = IO.readlines(gemfile).select{|line| line =~ /\A\s*gem/ }
     end
 
+    def gemfresh
+      raise "There has to be a gemfresh file to find out missing gems" unless GemFresh::ConfigFile.file
+      GemFresh::Config.config
+    end
   end
 end

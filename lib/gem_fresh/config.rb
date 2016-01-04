@@ -9,7 +9,7 @@ module GemFresh
     end
 
     def self.config
-      @@config
+      @@config ||= Config.new
     end
 
     def with_system_wide_impact(gems)
