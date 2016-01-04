@@ -45,7 +45,7 @@ Create a file called Gemfresh.rb in the root directory of your application.  Fil
 
     end
 
-The create a rake task like this:
+Then create a rake task like this:
 
     namespace :metrics do
       desc "display outdated gem version metrics"
