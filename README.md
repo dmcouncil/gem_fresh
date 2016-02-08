@@ -4,7 +4,7 @@ The purpose of GemFresh is to expose useful information about how outdated your 
 
 ## Setup
 
-Create a file called GemFresh.rb in the root directory of your application.  Fill it out like this:
+Create `config/initializers/gem_fresh.rb` for your Rails application.  Fill it out like this:
 
     # Any gems that you put in the Gemfile should also be listed here.
     # The rake metrics:outdated_gems task calculates which gems are
@@ -38,30 +38,19 @@ Create a file called GemFresh.rb in the root directory of your application.  Fil
 
       # We ignore these since we are in complete control of their update cycles.
       gems.that_are_private %w(
-        dmc_server_admin
         job_state
         ...
       )
 
     end
 
-Then create a rake task like this:
-
-    namespace :metrics do
-      desc "display outdated gem version metrics"
-      task :outdated_gems do
-        GemFresh::Reporter.new.report
-      end
-    end
-
-
 ## Usage
 
 See information on your outdated gems by running the rake task:
 
-    rake metrics:outdated_gems
+    rake gem_fresh:outdated
 
-This combines information from `bundle outdated` with the information in GemFresh.rb to give a weighted view as to how outdated your third-party Ruby code is and how much it matters.
+This combines information from `bundle outdated` with the information in the GemFresh config to give a weighted view as to how outdated your third-party Ruby code is and how much it matters.
 
 Whenever you add a gem to your Gemfile, add it to GemFresh.rb so that the rake task knows how important the gem is.
 
