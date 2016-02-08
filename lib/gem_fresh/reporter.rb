@@ -14,7 +14,7 @@ module GemFresh
       puts "gems like RSpec get a higher bounty, simple add-on tools like bullet"
       puts "get a lower bounty.  See Gemfresh.rb for details."
       puts
-      puts "The total bounty is #{@calculator.total_score} points.".magenta
+      puts "The total bounty is #{@calculator.total_score} points."
       puts
       puts "These are the outdated gems, sorted by highest bounty:"
       puts
@@ -22,11 +22,11 @@ module GemFresh
       sorted_scores.each do |gem_name, score|
         name = "  #{gem_name.ljust(25)[0..24]} "
         if score >= 1000
-          puts "#{name} #{score}".red
+          puts "#{name} #{score}"
         elsif score > 0
-          puts "#{name} #{score}".yellow
+          puts "#{name} #{score}"
         else
-          puts "#{name} up to date".green
+          puts "#{name} up to date"
         end
       end
       puts

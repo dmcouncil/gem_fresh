@@ -26,7 +26,6 @@ module GemFresh
         end
       end
       missing_gems.reject!{|g| g == 'rails'}
-      missing_gems.reject!{|g| g == 'gem_fresh'}
       missing_gems
     end
 
@@ -43,7 +42,6 @@ module GemFresh
     end
 
     def gemfresh
-      raise "There has to be a gemfresh file to find out missing gems" unless GemFresh::ConfigFile.file
       GemFresh::Config.config
     end
   end

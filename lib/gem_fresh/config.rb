@@ -9,7 +9,14 @@ module GemFresh
     end
 
     def self.config
-      @@config ||= Config.new
+      @@config ||= begin
+        config = Config.new
+        config.with_system_wide_impact([])
+        config.with_local_impact([])
+        config.with_minimal_impact([])
+        config.that_are_private([])
+        config
+      end
     end
 
     def with_system_wide_impact(gems)
@@ -36,7 +43,7 @@ module GemFresh
 
     def clean_gems(gems)
       if gems.include?('rails')
-        raise "Do not explicitly specify the rails gem in Gemfresh.rb."
+        raise "Do not explicitly specify the rails gem in Gemfresh.rb." #TODO: why not?
       end
       gems
     end
