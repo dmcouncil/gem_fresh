@@ -1,5 +1,7 @@
 # GemFresh
 
+[![Code Climate](https://codeclimate.com/github/dmcouncil/gem_fresh/badges/gpa.svg)](https://codeclimate.com/github/dmcouncil/gem_fresh)
+
 The purpose of GemFresh is to expose useful information about how outdated your application gems are.
 
 ## Setup
@@ -56,3 +58,6 @@ Whenever you add a gem to your Gemfile, add it to GemFresh.rb so that the rake t
 
 Gems are assigned points.  The more central a gem is, and the more outdated it is, the higher the points.  You can think of the points as a "bounty" on the gem, telling you how badly it needs to be updated.
 
+## About
+
+GemFresh was originally developed at [the District Management Council](http://dmcouncil.org) by Wyatt Greene, and is now maintained by [DMC](/dmcouncil).
