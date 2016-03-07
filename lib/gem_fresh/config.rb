@@ -43,7 +43,7 @@ module GemFresh
 
     def clean_gems(gems)
       if gems.include?('rails')
-        raise "Do not explicitly specify the rails gem in Gemfresh.rb." #TODO: why not?
+        raise "Do not explicitly specify the rails gem in gem_fresh.rb." #TODO: why not?
       end
       gems
     end
