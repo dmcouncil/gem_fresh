@@ -6,8 +6,8 @@ require 'gem_fresh/version'
 Gem::Specification.new do |spec|
   spec.name          = "gem_fresh"
   spec.version       = GemFresh::VERSION
-  spec.authors       = ["Anne Geiersbach"]
-  spec.email         = ["annasazi@gmail.com"]
+  spec.authors       = ["Anne Geiersbach", "Parker Morse"]
+  spec.email         = ["annasazi@gmail.com", "flashesofpanic@gmail.com"]
 
   spec.summary       = %q{Quantifying the freshness of your gems.}
   spec.homepage      = "https://github.com/dmcouncil/gem_fresh"
@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.9"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_dependency "bundler", "~> 1.9"
+  spec.add_dependency "rake", "~> 10.0"
 end
