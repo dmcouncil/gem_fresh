@@ -44,7 +44,7 @@ module GemFresh
       version_hash = {}
       versions.each { |v| version_hash[v.first.to_sym] = v.last unless v.size > 2 }
       return { available_version: GemVersion.new(version_hash[:newest]),
-                current_version: GemVersion.new(version_hash.try(:installed, version_hash[:newest])) }
+                current_version: GemVersion.new(version_hash[:installed]) }
     end
 
     def extract_older_bundler_data(version_data)
