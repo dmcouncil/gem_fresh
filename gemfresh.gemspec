@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["annasazi@gmail.com", "flashesofpanic@gmail.com"]
 
   spec.summary       = %q{Quantifying the freshness of your gems.}
+  spec.description   = %q{Uses Bundler's "outdated" function and some ranking of your gems to generate a score for how significantly you're behind on updating gems.}
   spec.homepage      = "https://github.com/dmcouncil/gem_fresh"
   spec.license       = "MIT"
 
