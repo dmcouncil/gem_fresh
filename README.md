@@ -50,7 +50,7 @@ Create `config/initializers/gem_fresh.rb` for your Rails application.  Fill it o
 
 See information on your outdated gems by running the rake task:
 
-    rake gem_fresh:outdated
+    rake gem_fresh
 
 This combines information from `bundle outdated` with the information in the GemFresh config to give a weighted view as to how outdated your third-party Ruby code is and how much it matters.
 

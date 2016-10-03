@@ -12,6 +12,8 @@ module GemFresh
           GemFresh::Reporter.new.report
         end
       end
+
+      task :gem_fresh => ['gem_fresh:outdated']
     end
   end
 end
