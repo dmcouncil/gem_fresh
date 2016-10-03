@@ -40,6 +40,7 @@ module GemFresh
       # * zeus (newest 0.15.4, installed 0.13.3) in group "test"
       # * websocket-driver (newest 0.6.3, installed 0.5.4)
       #
+      return false if version_data.nil? || version_data.strip.blank?
       versions = version_data.split(', ').map(&:strip).map(&:split) # [["newest", "4.2.5"], ["installed", "3.2.22"], ["requested", "=", "3.2.22"]]
       version_hash = {}
       versions.each { |v| version_hash[v.first.to_sym] = v.last unless v.size > 2 }
@@ -66,7 +67,7 @@ module GemFresh
     def raw_gem_info_from_bundler
       if @bundler_version.major > 1 || (@bundler_version.major == 1 && @bundler_version.minor >= 12)
         # All lines are useful when using the --porcelain flag
-        return %x{ bundle outdated --porcelain }
+        return %x{ bundle outdated --porcelain }.split("\n").map(&:strip)
       end
       just_the_gem_lines = %x{ bundle outdated }.split("\n").map(&:strip).select do |line|
         line =~ /\A\s*\*\s+\w/
