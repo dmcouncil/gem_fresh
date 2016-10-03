@@ -58,6 +58,10 @@ Whenever you add a gem to your Gemfile, add it to GemFresh.rb so that the rake t
 
 Gems are assigned points.  The more central a gem is, and the more outdated it is, the higher the points.  You can think of the points as a "bounty" on the gem, telling you how badly it needs to be updated.
 
+*If you're finding that `gem_fresh` takes forever* you may want to _temporarily_ change your Gemfile's `source` line from `source 'https://rubygems.org'` to `source 'http://rubygems.org'`. This is because `bundle outdated` makes a _lot_ of requests to the Rubygems API. Removing the SSL handshake reduces the total time dramatically. 
+
+I'll re-emphasize that this should be a _temporary_ change, because SSL protects you from a man-in-the-middle attack which could lead to you unknowingly installing bogus gems. It's less necessary to use SSL for this operation because no gems are installed; we're just querying the index for version data.
+
 ## About
 
 GemFresh was originally developed at [the District Management Council](http://dmcouncil.org) by Wyatt Greene, and is now maintained by [DMC](/dmcouncil).
