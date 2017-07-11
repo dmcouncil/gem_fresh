@@ -1,11 +1,15 @@
+require 'json' # Parsing Bower output
+
 module GemFresh
   class Outdated
 
-    attr_reader :gem_info
+    attr_reader :gem_info, :module_info, :component_info
 
     def initialize
       @bundler_version = GemVersion.new(::Bundler::VERSION)
       figure_out_outdated_gems
+      figure_out_outdated_modules
+      figure_out_outdated_components
     end
 
     private
@@ -40,7 +44,7 @@ module GemFresh
       # * zeus (newest 0.15.4, installed 0.13.3) in group "test"
       # * websocket-driver (newest 0.6.3, installed 0.5.4)
       #
-      return false if version_data.nil? || version_data.strip.blank?
+      return false if version_data.nil? || version_data.strip == ''
       versions = version_data.split(', ').map(&:strip).map(&:split) # [["newest", "4.2.5"], ["installed", "3.2.22"], ["requested", "=", "3.2.22"]]
       version_hash = {}
       versions.each { |v| version_hash[v.first.to_sym] = v.last unless v.size > 2 }
@@ -75,5 +79,40 @@ module GemFresh
       just_the_gem_lines
     end
 
+    def figure_out_outdated_modules
+      @module_info = {}
+      # Data from npm outdated --parseable looks like this:
+      # $PROJECT_ROOT/node_modules/ember-truth-helpers:ember-truth-helpers@1.2.0:ember-truth-helpers@1.2.0:ember-truth-helpers@1.3.0
+      # $PROJECT_ROOT/node_modules/loader.js:loader.js@4.5.1:loader.js@4.3.0:loader.js@4.5.1
+      # $PROJECT_ROOT/node_modules/rails-csrf:rails-csrf@1.0.1:rails-csrf@1.0.1:rails-csrf@2.0.1
+      # $PROJECT_ROOT/node_modules/testem:testem@git:testem@1.16.1:testem@git
+      raw_gem_info_from_npm.map do |line|
+        next if version_data.nil? || version_data.strip.blank?
+        versions = version_data.split(':').map(&:strip).map { |version| version.split('@') } # [["loader.js"], ["loader.js", "4.5.1"], ["loader.js", "4.3.0"], ["loader.js", "4.5.1"]]
+        @module_info[versions[0].to_sym] = 
+          { available_version: GemVersion.new(versions[3][1]),
+            current_version: GemVersion.new(versions[2][1]) }
+      end
+    end
+
+    def raw_gem_info_from_npm
+      return %x{ npm outdated --parseable }.split("\n").map(&:strip)
+    end
+
+    def figure_out_outdated_components
+      @component_info ={}
+      raw_gem_info_from_bower.each do |component_hash|
+        @component_info[component_hash['name']] = {
+          available_version: GemVersion.new(component_hash['update']['latest']),
+          current_version: GemVersion.new(component_hash['pkgMeta']['version'])
+        }
+      end
+    end
+
+    def raw_gem_info_from_bower
+      # The -j option makes bower return JSON data
+      bower_hash = JSON.parse(%x{ bower list -j })
+      return bower_hash['dependencies']
+    end
   end
 end

@@ -3,6 +3,13 @@ module GemFresh
 
     def initialize
       parse_gemfile
+      parse_package_json
+    end
+
+    def check_for_missing_dependencies!
+      check_for_missing_gems!
+      check_for_missing_node!
+      check_for_missing_bower!
     end
 
     def check_for_missing_gems!
@@ -13,6 +20,26 @@ module GemFresh
         end
         raise message
       end
+    end
+
+    def check_for_missing_node!
+      if missing_node.any?
+        message = "The following npm modules are in your package.json but not in your dep_fresh.rb file:\n"
+      end
+      missing_node.each do |module_name|
+        message << " #{module_name}\n"
+      end
+      raise message
+    end
+
+    def check_for_missing_bower!
+      if missing_bower.any?
+        message = "The following bower components are in your bower.json but not in your dep_fresh.rb file:\n"
+      end
+      missing_bower.each do |component_name|
+        message << " #{component_name}\n"
+      end
+      raise message
     end
 
   private
