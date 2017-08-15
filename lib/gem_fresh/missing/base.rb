@@ -1,5 +1,3 @@
-require 'missing/gems.rb'
-
 module GemFresh::Missing
   class Base
 

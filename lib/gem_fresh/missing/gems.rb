@@ -15,11 +15,10 @@ module GemFresh::Missing
     end
 
     # TODO: we shouldn't be so tied to Rails in future
+    # Reducing that dependency would mean finding the Gemfile another way
     def parse_manifest
       gemfile = File.join(Rails.root, 'Gemfile')
       @gem_lines = IO.readlines(gemfile).select{|line| line =~ /\A\s*gem/ }
     end
-
-
   end
 end

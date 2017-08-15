@@ -1,8 +1,8 @@
-require 'missing/base'
-require 'missing/gems'
+require 'gem_fresh/missing/base'
+require 'gem_fresh/missing/gems'
 
 module GemFresh
-  class Missing
+  class MissingChecker
 
     def initialize
       @gem_missing = GemFresh::Missing::Gems.new(gemfresh)

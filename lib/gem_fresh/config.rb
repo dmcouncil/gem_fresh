@@ -22,7 +22,7 @@ module GemFresh
       end
     end
 
-    def with_system_wide_impact(gems, type)
+    def with_system_wide_impact(gems, type=:gem)
       case type
       when :gem 
         @system_wide_gems = clean_gems(gems)
