@@ -82,6 +82,19 @@ module GemFresh
       all_gems + all_modules + all_components
     end
 
+    # Checking which dependency managers are in use
+    def using_gems?
+      all_gems.size > 0
+    end
+
+    def using_bower?
+      all_components.size > 0
+    end
+
+    def using_npm?
+      all_modules.size > 0
+    end
+
   private
 
     def clean_gems(gems)
