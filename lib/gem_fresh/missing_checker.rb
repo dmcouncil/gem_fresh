@@ -6,8 +6,8 @@ module GemFresh
 
     def initialize
       @gem_missing = GemFresh::Missing::Gems.new(gemfresh)
-      # @bower_missing = GemFresh::Missing::Modules.new(gemfresh)
-      # @package_missing = GemFresh::Missing::Components.new(gemfresh)
+      # @bower_missing = GemFresh::Missing::Components.new(gemfresh)
+      # @package_missing = GemFresh::Missing::Modules.new(gemfresh)
       parse_manifests
     end
 

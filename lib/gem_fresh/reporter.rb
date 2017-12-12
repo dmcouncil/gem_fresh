@@ -2,7 +2,7 @@ module GemFresh
   class Reporter
 
     def initialize
-      MissingChecker.new.check_for_missing_gems!
+      MissingChecker.new.check_for_missing_dependencies!
       @calculator = Calculator.new
       @calculator.calculate!
     end

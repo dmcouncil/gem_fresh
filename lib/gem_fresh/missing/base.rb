@@ -18,8 +18,12 @@ module GemFresh::Missing
 
   private
 
-    def missing
+    def get_libs_from_gemfresh
       raise 'Define libs_from_gemfresh in subclass' unless libs_from_gemfresh.defined?
+    end
+
+    def missing
+      libs_from_gemfresh = get_libs_from_gemfresh
       missing_libs = []
       lib_names.each do |lib_from_manifest|
         unless libs_from_gemfresh.include?(lib_from_manifest)

@@ -1,3 +1,7 @@
+# require 'gem_fresh/outdated/components'
+require 'gem_fresh/outdated/gems'
+# require 'gem_fresh/outdated/modules'
+
 module GemFresh
   class Calculator
 
@@ -18,7 +22,7 @@ module GemFresh
     end
 
     def calculate!
-      @gem_freshness_info = GemFresh::Outdated.new.gem_info
+      @gem_freshness_info = GemFresh::Outdated::Gems.new.figure_out_outdated_gems
       calculate_freshness_scores_for_each_gem
     end
 
