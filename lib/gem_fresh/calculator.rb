@@ -1,6 +1,6 @@
-# require 'gem_fresh/outdated/components'
+require 'gem_fresh/outdated/components'
 require 'gem_fresh/outdated/gems'
-# require 'gem_fresh/outdated/modules'
+require 'gem_fresh/outdated/modules'
 
 module GemFresh
   class Calculator
