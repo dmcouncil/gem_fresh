@@ -13,37 +13,39 @@ Create `config/initializers/gem_fresh.rb` for your Rails application.  Fill it o
     # outdated and then combines that information with the information
     # listed here about a particular gem's reach in the application code.
     #
-    GemFresh::Config.configure do |gems|
+    if Rails.env == 'development'
+      GemFresh::Config.configure do |gems|
 
-      # Updating these gems could require you to make large, system-wide changes
-      # to the application code.
-      gems.with_system_wide_impact %w(
-        resque
-        rspec
-        ...
-      )
+        # Updating these gems could require you to make large, system-wide changes
+        # to the application code.
+        gems.with_system_wide_impact %w(
+          resque
+          rspec
+          ...
+        )
 
-      # Updating these gems could require you to make some changes to small
-      # sections of the application.
-      gems.with_local_impact %w(
-        fog
-        tabulous
-        ...
-      )
+        # Updating these gems could require you to make some changes to small
+        # sections of the application.
+        gems.with_local_impact %w(
+          fog
+          tabulous
+          ...
+        )
 
-      # When updating these gems, you barely have to touch any code at all.
-      gems.with_minimal_impact %w(
-        airbrake
-        bullet
-        ...
-      )
+        # When updating these gems, you barely have to touch any code at all.
+        gems.with_minimal_impact %w(
+          airbrake
+          bullet
+          ...
+        )
 
-      # We ignore these since we are in complete control of their update cycles.
-      gems.that_are_private %w(
-        job_state
-        ...
-      )
+        # We ignore these since we are in complete control of their update cycles.
+        gems.that_are_private %w(
+          job_state
+          ...
+        )
 
+      end
     end
 
 ## Usage
